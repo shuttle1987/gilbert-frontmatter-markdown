@@ -1,10 +1,12 @@
+from pathlib import Path
+
 from markdown import markdown
 
 from gilbert import Site
 from gilbert.content import Page
 
 
-def load_frontmatter_md(path):
+def load_frontmatter_md(path: Path):
     """Loader for markdown files that contain frontmatter"""
     data = path.read_text(encoding='utf-8')
     processed = markdown(self.data, output_format='html5', extensions=['meta'])
