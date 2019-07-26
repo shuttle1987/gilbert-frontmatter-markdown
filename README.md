@@ -2,6 +2,14 @@
 
 This is a plugin for [Gilbert](https://github.com/funkybob/gilbert) that provides the ability to load markdown documents that contain embedded metadata in the frontmatter.
 
+## Installation
+
+This plugin is not currently published on PyPi so to install you can install from GitHub like so:
+
+```
+pip install git+https://github.com/shuttle1987/gilbert-frontmatter-markdown.git
+```
+
 ## Why this plugin exists
 
 You may have noticed that Gilbert provides a default markdown loader, but the default markdown loader in Gilbert will not process the frontmatter in your documents.
