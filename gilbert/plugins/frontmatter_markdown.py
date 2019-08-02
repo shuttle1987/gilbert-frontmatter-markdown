@@ -17,7 +17,6 @@ class FrontmatterMarkdownPage(Page):
         extras = self.extras
         if not extras:
             extras = self.site.config.get('content_type', {}).get('MarkdownPage', [])
-        #import pdb; pdb.set_trace()
         md = markdown.Markdown(extensions=extras, output_format='html5')
         processed = md.convert(self.data)
         return processed
