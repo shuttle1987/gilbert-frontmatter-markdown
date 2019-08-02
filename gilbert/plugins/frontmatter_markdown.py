@@ -20,12 +20,12 @@ class FrontmatterMarkdownPage(Page):
         #import pdb; pdb.set_trace()
         md = markdown.Markdown(extensions=extras, output_format='html5')
         processed = md.convert(self.data)
-        return processed, md.Meta
+        return processed
 
 def load_frontmatter_md(path):
     data = path.read_text(encoding='utf-8')
-
-    return data, {'content_type': 'FrontmatterMarkdownPage'}
+    md = markdown.Markdown(extensions=['meta'], output_format='html5')
+    return data, {'content_type': 'FrontmatterMarkdownPage', **md.Meta}
 
 Site.register_loader('md', load_frontmatter_md)
 
