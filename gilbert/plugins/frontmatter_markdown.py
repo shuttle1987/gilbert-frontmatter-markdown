@@ -11,7 +11,6 @@ print("Loaded the Gilbert markdown with frontmatter loader")
 def load_frontmatter_md(path):
     data = path.read_text(encoding='utf-8')
     md = markdown.Markdown(output_format='html5')
-    #import pdb; pdb.set_trace(header=f"Current file: {path}")
 
     with path.open() as fin:
         loader = yaml.Loader(fin)
