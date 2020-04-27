@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='gilbert-frontmatter-markdown',
-      version='0.1.0',
+      version='0.2.0',
       description='Supports frontmatter metadata',
       url='https://github.com/shuttle1987/gilbert-frontmatter-markdown',
       author='Janis Lesinskis',
@@ -11,7 +11,8 @@ setup(name='gilbert-frontmatter-markdown',
       ],
       keywords='gilbert',
       install_requires=[
-          'markdown'
+          'markdown',
+          'pyyaml',
       ],
       include_package_data = True,
 )

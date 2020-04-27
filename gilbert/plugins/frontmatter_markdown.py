@@ -1,30 +1,31 @@
+"""A frontmatter aware markdown loader for Gilbert"""
 from pathlib import Path
 
 import markdown
+import yaml
 
 from gilbert import Site
-from gilbert.content import Page
-from gilbert.utils import oneshot
-
 
 print("Loaded the Gilbert markdown with frontmatter loader")
 
-class FrontmatterMarkdownPage(Page):
-    extras: list = ['meta']
-
-    @oneshot
-    def content(self):
-        extras = self.extras
-        if not extras:
-            extras = self.site.config.get('content_type', {}).get('MarkdownPage', [])
-        md = markdown.Markdown(extensions=extras, output_format='html5')
-        processed = md.convert(self.data)
-        return processed
-
 def load_frontmatter_md(path):
     data = path.read_text(encoding='utf-8')
-    md = markdown.Markdown(extensions=['meta'], output_format='html5')
-    return data, {'content_type': 'FrontmatterMarkdownPage', **md.Meta}
+    md = markdown.Markdown(output_format='html5')
+
+    with path.open() as fin:
+        loader = yaml.Loader(fin)
+        meta = loader.get_data()
+        # PyYAML Reader greedily consumes chunks from the stream.
+        # We must recover any un-consumed data, as well as what's left in the stream.
+        if loader.buffer:
+            data = loader.buffer[loader.pointer:-1]
+        else:
+            data = ''
+        data += fin.read()
+        print('markdown frontmatter meta: ', meta)
+
+    processed = md.convert(data)
+    return processed, meta
 
 Site.register_loader('md', load_frontmatter_md)
 
