@@ -5,9 +5,12 @@ setup(name='gilbert-frontmatter-markdown',
       description='Supports frontmatter metadata',
       url='https://github.com/shuttle1987/gilbert-frontmatter-markdown',
       author='Janis Lesinskis',
+      license='AGPL v3',
       packages=['gilbert.plugins'],
       classifiers = [
           'Development Status :: 4 - Beta',
+          'License :: OSI Approved :: GNU Affero General Public License v3',
+          'Operating System :: OS Independent',
       ],
       keywords='gilbert',
       install_requires=[
